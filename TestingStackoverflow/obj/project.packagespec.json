@@ -29,6 +29,49 @@
   },
   "frameworks": {
     "netcoreapp3.0": {
+      "dependencies": {
+        "DotNetSeleniumExtras.PageObjects": {
+          "target": "Package",
+          "version": "[3.11.0, )"
+        },
+        "DotNetSeleniumExtras.PageObjects.Core": {
+          "target": "Package",
+          "version": "[3.12.0, )"
+        },
+        "Microsoft.NET.Test.Sdk": {
+          "target": "Package",
+          "version": "[16.5.0-preview-20200110-02, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.2.8, )"
+        },
+        "NUnit": {
+          "target": "Package",
+          "version": "[3.12.0, )"
+        },
+        "NUnit3TestAdapter": {
+          "target": "Package",
+          "version": "[3.16.0, )"
+        },
+        "Selenium.Support": {
+          "target": "Package",
+          "version": "[3.141.0, )"
+        },
+        "Selenium.WebDriver": {
+          "target": "Package",
+          "version": "[3.141.0, )"
+        },
+        "Selenium.WebDriver.ChromeDriver": {
+          "target": "Package",
+          "version": "[79.0.3945.3600, )"
+        },
+        "Selenium.WebDriverBackedSelenium": {
+          "target": "Package",
+          "version": "[3.141.0, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",

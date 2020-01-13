@@ -1,0 +1,34 @@
+﻿using System;
+using TestingStackoverflow.Helpers;
+
+namespace TestingStackoverflow.Models
+{
+    public class User
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        
+        
+        public static User GetValidUserForLogin()
+        {
+            return new User()
+            {
+                Name = "test",
+                Email = "testing1995test@mail.ru",
+                Password = "testing123T",
+            };
+        }
+        
+        public static User GetRandomUser()
+        {
+            var r = new Random((int)DateTime.Now.Ticks);
+            return new User()
+            {
+                Name = TextHelpers.GetRandomWord(10),
+                Email = TextHelpers.GetRandomWord(10) + "@" + TextHelpers.GetRandomWord(6) + "." + TextHelpers.GetRandomWordWithoutNumbers(2),
+                Password = TextHelpers.GetRandomWord(8) + r.Next(0, 9)
+            };
+        }
+    }
+}
