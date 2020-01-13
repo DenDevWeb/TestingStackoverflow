@@ -66,5 +66,47 @@ namespace TestingStackoverflow
             Assert.AreEqual(result, "Registration was successful");
             
         }
+        [Test]
+        public void FailedLogin()
+        {
+            LoginPage loginPage = new LoginPage(_driver);
+            //неправильный mail
+            User user = User.GetRandomUser();
+            user.Email = "test";
+            loginPage.Navigate().FillUser(user).Submit();
+            Assert.True(loginPage.AreEqual());
+            
+            //user.Email = "test@test.ru";
+            user = User.GetValidUserForLogin();
+            user.Password = "";
+            HomePage homePage = null; //= loginPage.Navigate().FillUser(user).Submit();
+            try
+            {
+                homePage = loginPage.Navigate().FillUser(user).Submit();
+            }
+            catch (TextException e)
+            {
+                Assert.AreEqual("Password or password is empty",e.Message);
+            }
+            //Assert.True(homePage.AreEqual());
+            //string tmp = _driver.Title;
+            //Assert.AreEqual(result, "Registration was successful");
+
+        }
+        
+        [Test]
+        public void SuccessLogin()
+        {
+            LoginPage loginPage = new LoginPage(_driver);
+
+            //user.Email = "test@test.ru";
+            User user = User.GetValidUserForLogin();
+            HomePage homePage = loginPage.Navigate().FillUser(user).Submit();
+            Assert.True(homePage.AreEqual());
+            //string tmp = _driver.Title;
+            //Assert.AreEqual(result, "Registration was successful");
+
+        }
+        
     }
 }

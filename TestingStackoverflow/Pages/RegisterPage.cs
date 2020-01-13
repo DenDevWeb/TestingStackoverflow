@@ -62,7 +62,7 @@ namespace TestingStackoverflow.Pages
         
         public RegisterPage FillUser(User user)
         {
-            _nameInput.SendKeys(user.Name);
+            //_nameInput.SendKeys(user.Name);
             _emailInput.SendKeys(user.Email);
             _passwordInput.SendKeys(user.Password);
             return this;
