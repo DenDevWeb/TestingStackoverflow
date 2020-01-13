@@ -54,6 +54,17 @@ namespace TestingStackoverflow
              {
                  Assert.AreEqual("Password is empty",e.Message);
              }
+             
+        }
+
+        [Test]
+        public void SuccessRegistration()
+        {
+            RegisterPage registerPage = new RegisterPage(_driver);
+            User user = User.GetRandomUser();
+            string result = registerPage.Navigate().FillUser(user).Submit();
+            Assert.AreEqual(result, "Registration was successful");
+            
         }
     }
 }

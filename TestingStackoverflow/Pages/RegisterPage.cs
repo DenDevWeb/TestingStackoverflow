@@ -42,6 +42,7 @@ namespace TestingStackoverflow.Pages
 
         private static readonly string PASSWORD_EMPTY = "/html/body/div[3]/div[2]/div/div/div[3]/form/div[3]/p[2]";
         private static readonly string EMAIL_INCORRECT ="/html/body/div[3]/div[2]/div/div/div[3]/form/div[2]/p";
+        private static readonly string CONFIRMATION_MAIL ="/html/body/div[3]/div[2]/div";
         // [FindsBy(How = How.XPath, Using = "/html/body/div[4]/div[2]/div/div/div[3]/form/div[2]/p/text()[1]")] 
         // private IWebElement _emailEmptyLine;
         
@@ -67,7 +68,7 @@ namespace TestingStackoverflow.Pages
             return this;
         }
 
-        public void Submit()
+        public string Submit()
         {
             //_cookiePolicyButton.Click();
             try
@@ -91,6 +92,11 @@ namespace TestingStackoverflow.Pages
             {
                 throw new TextException("Password is empty");
             }
+            
+            if (ElementHelper.HasElementText(_driver, By.XPath(CONFIRMATION_MAIL), TimeSpan.FromMilliseconds(50)))
+            {
+                return "Registration was successful";
+            }
             // WebDriverWait wait = new WebDriverWait(_driver,TimeSpan.FromMilliseconds(50)); 
             // //if (wait.Until(d => _driver.FindElements(By.XPath(EMAIL_INCORRECT)).Count>0))
             // if (wait.Until(d => _tmp.Text != ""))
@@ -104,6 +110,7 @@ namespace TestingStackoverflow.Pages
             // {
             //     throw new TextException("Password is empty");
             // }
+            return "Registration was unsuccessful";
         }
         
         public string GetPageName()
