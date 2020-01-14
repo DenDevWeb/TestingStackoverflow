@@ -30,6 +30,11 @@ namespace TestingStackoverflow.Pages
             
             return this;
         }
+
+        public ProfilePage ToProfile()
+        {
+            return new ProfilePage(_driver);
+        }
         public string GetPageName()
         {
             return "Dashboard";

@@ -30,7 +30,8 @@ namespace TestingStackoverflow.Helpers
             WebDriverWait wait = new WebDriverWait(driver, time);
             try
             {
-                if (wait.Until(d => driver.FindElements(selector).FirstOrDefault().Text != ""))
+                //IWebElement test = driver.FindElement(selector);
+                if (wait.Until(d => driver.FindElement(selector).Text != ""))
                 {
                     return true;
                 }
