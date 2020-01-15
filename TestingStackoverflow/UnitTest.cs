@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -95,38 +96,48 @@ namespace TestingStackoverflow
         }
         
         [Test]
-                 public void SuccessLogin()
-                 {
-                     LoginPage loginPage = new LoginPage(_driver);
+        public void SuccessLogin()
+        {
+             LoginPage loginPage = new LoginPage(_driver);
          
-                     //user.Email = "test@test.ru";
-                     User user = User.GetValidUserForLogin();
-                     HomePage homePage = loginPage.Navigate().FillUser(user).Submit();
+             //user.Email = "test@test.ru";
+             User user = User.GetValidUserForLogin();
+             HomePage homePage = loginPage.Navigate().FillUser(user).Submit();
                      
-                     Assert.True(homePage.AreEqual());
+             Assert.True(homePage.AreEqual());
                      
-                     //string tmp = _driver.Title;
-                     //Assert.AreEqual(result, "Registration was successful");
+             //string tmp = _driver.Title;
+             //Assert.AreEqual(result, "Registration was successful");
+        }
+        
+        [Test]
+        public void FailedAvatar()
+        {
+            LoginPage loginPage = new LoginPage(_driver);
          
-                 }
+            //user.Email = "test@test.ru";
+            User user = User.GetValidUserForLogin();
+            try
+            {
+                loginPage.Navigate().FillUser(user).Submit().ToProfile().Navigate().Submit();
+            }
+            catch (TextException e)
+            {
+                Assert.AreEqual("The file is too large",e.Message);
+            }
+                     
+        }
 
-                 [Test]
-                 public void FailedAvatar()
-                 {
-                     LoginPage loginPage = new LoginPage(_driver);
+        [Test]
+        public void SuccessUserProfile()
+        {
+            LoginPage loginPage = new LoginPage(_driver);
          
-                     //user.Email = "test@test.ru";
-                     User user = User.GetValidUserForLogin();
-                     try
-                     {
-                         loginPage.Navigate().FillUser(user).Submit().ToProfile().Navigate().Submit();
-                     }
-                     catch (TextException e)
-                     {
-                         Assert.AreEqual("The file is too large",e.Message);
-                     }
-                     
-                 }
+            //user.Email = "test@test.ru";
+            User userLogin = User.GetValidUserForLogin();
+            UserProfile userProfile = UserProfile.GetValidUserForProfile();
+            loginPage.Navigate().FillUser(userLogin).Submit().ToProfile().Navigate().FillUser(userProfile);
+        }
         
     }
 }
