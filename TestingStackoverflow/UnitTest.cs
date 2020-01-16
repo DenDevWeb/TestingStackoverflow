@@ -117,9 +117,10 @@ namespace TestingStackoverflow
          
             //user.Email = "test@test.ru";
             User user = User.GetValidUserForLogin();
+            UserProfile userProfile = UserProfile.GetValidUserForProfile();
             try
             {
-                loginPage.Navigate().FillUser(user).Submit().ToProfile().Navigate().Submit();
+                loginPage.Navigate().FillUser(user).Submit().ToProfile().Navigate().GoToEditProfile().LoadAvatar(userProfile);
             }
             catch (TextException e)
             {
@@ -136,7 +137,8 @@ namespace TestingStackoverflow
             //user.Email = "test@test.ru";
             User userLogin = User.GetValidUserForLogin();
             UserProfile userProfile = UserProfile.GetValidUserForProfile();
-            loginPage.Navigate().FillUser(userLogin).Submit().ToProfile().Navigate().FillUser(userProfile);
+            ProfilePage result = loginPage.Navigate().FillUser(userLogin).Submit().ToProfile().Navigate().GoToEditProfile().FillUser(userProfile).GoToSaveProfile().GoToEditProfile().Submit(userProfile);
+            Assert.NotNull(result);
         }
         
     }

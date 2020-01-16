@@ -11,6 +11,7 @@ namespace TestingStackoverflow.Models
         public string City { get; set; }
         public DateTime BirthDate { get; set; }
         public Sex Gender { get; set; }
+        public string PathAvatar { get; set; }
         
         public string GetGender()
         {
@@ -35,7 +36,8 @@ namespace TestingStackoverflow.Models
                 Nickname = "Den",
                 City = "Белгород",
                 BirthDate = new DateTime(1998, 2, 28),
-                Gender = Sex.Male
+                Gender = Sex.Male,
+                PathAvatar = "D:\\TestingStackoverflow\\TestingStackoverflow\\Images\\test_big_avatar.jpg"
             };
         }
     }
